@@ -1,1 +1,1 @@
-# tf_practices
+To refresh my knowledge of tensorflow.
