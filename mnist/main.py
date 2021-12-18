@@ -4,6 +4,8 @@ import tensorflow_datasets as tf_ds
 from layers.dense_layer import DenseLayer
 from models.model import Model
 
+tf.random.set_seed(42)
+
 
 def normalise_img(image, label):
     image = tf.cast(image, tf.float32) / 255.
@@ -27,11 +29,11 @@ if __name__ == '__main__':
     ds_test = ds_test.cache()
     ds_test = ds_test.prefetch(tf.data.AUTOTUNE)
 
-    model = Model([DenseLayer(name="dense0", shape=[28 * 28, 64]), DenseLayer(name="dense1", shape=[64, 10])])
+    model = Model([DenseLayer(name="dense0", shape=[28 * 28, 32]), DenseLayer(name="dense1", shape=[32, 10])])
 
     optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 
-    for ep in range(30):
+    for ep in range(36):
 
         metrics_train = tf.keras.metrics.SparseCategoricalAccuracy()
 
