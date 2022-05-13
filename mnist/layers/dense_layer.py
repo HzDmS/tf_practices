@@ -8,7 +8,7 @@ from layers.layer import Layer
 class DenseLayer(Layer):
 
     """
-    A dense layer consists of a linear layer and a relu activation layer.
+    A dense layer consists of a linear layer and a ReLU activation layer.
     """
 
     def __init__(self, name: str, shape: List[int]):

@@ -7,7 +7,7 @@ from models.model import Model
 tf.random.set_seed(42)
 
 
-def normalise_img(image, label):
+def normalize_img(image, label):
     image = tf.cast(image, tf.float32) / 255.
     image = tf.reshape(image, [image.shape[0] * image.shape[1] * image.shape[2]])
     return image, label
@@ -17,14 +17,14 @@ if __name__ == '__main__':
     BATCH_SIZE = 64
     (ds_train, ds_test), ds_info = tf_ds.load(
         "mnist", split=["train", "test"], shuffle_files=True, as_supervised=True, with_info=True)
-    ds_train = ds_train.map(normalise_img, num_parallel_calls=tf.data.AUTOTUNE)
+    ds_train = ds_train.map(normalize_img, num_parallel_calls=tf.data.AUTOTUNE)
     ds_train = ds_train.cache()
     ds_train = ds_train.shuffle(ds_info.splits['train'].num_examples)
     ds_train = ds_train.batch(BATCH_SIZE)
     ds_train = ds_train.prefetch(tf.data.AUTOTUNE)
 
     ds_test = ds_test.map(
-        normalise_img, num_parallel_calls=tf.data.AUTOTUNE)
+        normalize_img, num_parallel_calls=tf.data.AUTOTUNE)
     ds_test = ds_test.batch(BATCH_SIZE)
     ds_test = ds_test.cache()
     ds_test = ds_test.prefetch(tf.data.AUTOTUNE)
